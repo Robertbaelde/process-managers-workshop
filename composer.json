@@ -1,0 +1,23 @@
+{
+    "name": "robertbaelde/workshop",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Robertbaelde\\Workshop\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Robertbaelde\\Workshop\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robertbaelde",
+            "email": "robert_baelde@hotmail.com"
+        }
+    ],
+    "require": {}
+}
