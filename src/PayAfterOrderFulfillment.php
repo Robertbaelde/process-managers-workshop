@@ -9,6 +9,7 @@ use Robertbaelde\Workshop\Waiter\OrderPlaced;
 
 class PayAfterOrderFulfillment implements ProcessManager
 {
+    use HandlesEvents;
     private bool $foodCooked = false;
 
     public function __construct(protected MessageBusInterface $messageBus)
@@ -53,24 +54,6 @@ class PayAfterOrderFulfillment implements ProcessManager
     public function handleFoodCooked(FoodCooked $foodCooked): void
     {
         $this->foodCooked = true;
-    }
-
-    public function handle(Message $message): void
-    {
-        $parts = explode('\\', get_class($message));
-        $methodName = 'handle' . end($parts);
-
-        if (method_exists($this, $methodName)) {
-            $this->{$methodName}($message);
-        }
-    }
-
-    public static function shouldStart(Message $message): bool
-    {
-        if(!$message instanceof OrderPlaced){
-            return false;
-        }
-        return $message->customerIsTrusted;
     }
 
     public function endsWhen(Message ...$messages): void
